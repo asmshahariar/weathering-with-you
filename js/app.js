@@ -42,9 +42,8 @@ class WeatheringWithYou {
     // Add this method to the WeatheringWithYou class
     async getRealWeather(lat, lon) {
         try {
-            const response = await fetch(
-                `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min`
-            );
+            // Call Netlify function instead of direct API call
+            const response = await fetch('/.netlify/functions/weather');
             const data = await response.json();
             
             // Convert weather code to description
@@ -63,7 +62,7 @@ class WeatheringWithYou {
             };
         } catch (error) {
             console.error('Error fetching weather:', error);
-            return friend.mockWeather; // Fallback to mock data
+            return friend.mockWeather;
         }
     }
 
@@ -140,25 +139,32 @@ class WeatheringWithYou {
     }
 
     shouldSendMessage(weather) {
-        // Add logic to determine if message should be sent
         const now = new Date();
         const lastSent = this.lastMessageSent || 0;
         const hoursSinceLastMessage = (now - lastSent) / (1000 * 60 * 60);
         
-        return hoursSinceLastMessage >= 3; // Send message every 3 hours
+        // Send message if weather changed and at least 2 hours have passed
+        return hoursSinceLastMessage >= 2;
     }
 
     async sendWhatsAppMessage(friendKey) {
         const friend = CONFIG[friendKey.toUpperCase()];
         const weather = friend.mockWeather;
         const weatherMessage = WEATHER_MESSAGES[weather.description]?.message || 
-                             WEATHER_MESSAGES['Mostly sunny'].message;
+                             WEATHER_MESSAGES['Mostly clear'].message;
         const songLink = WEATHER_MESSAGES[weather.description]?.song;
         const quote = DAILY_QUOTES[Math.floor(Math.random() * DAILY_QUOTES.length)];
+        const currentTime = new Date().toLocaleTimeString();
 
-        const message = `${weatherMessage}\n\n${quote}\n\nListen to this song with me: ${songLink}`;
+        const message = `🕐 ${currentTime}\n\n` +
+                       `🌡️ ${weather.temp}°C\n` +
+                       `💧 Humidity: ${weather.humidity}%\n` +
+                       `🌪️ Wind: ${weather.wind_speed} km/h\n\n` +
+                       `${weatherMessage}\n\n` +
+                       `💭 "${quote}"\n\n` +
+                       `🎵 Listen with me:\n${songLink}`;
+
         const whatsappURL = `https://wa.me/${friend.phone}?text=${encodeURIComponent(message)}`;
-        
         window.open(whatsappURL, '_blank');
         this.lastMessageSent = new Date();
     }
