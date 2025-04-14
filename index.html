@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weathering With You - Friend Connection</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section left">
+            <div class="profile-card">
+                <img src="images/profile1.jpg" alt="Raihan" class="profile-img">
+                <h2 class="name">Arian</h2>
+                <h3 class="location">Sylhet</h3>
+                <div class="weather-card">
+                    <div class="temperature">
+                        <span class="current-temp">28°C</span>
+                        <span class="min-max">24°C / 32°C</span>
+                    </div>
+                    <div class="weather-info">
+                        <p class="description">Partly cloudy</p>
+                        <p class="humidity">Humidity: 75%</p>
+                        <p class="wind">Wind: 12 km/h</p>
+                    </div>
+                    <div class="sun-times">
+                        <p class="sunrise">Sunrise: 06:00</p>
+                        <p class="sunset">Sunset: 18:30</p>
+                    </div>
+                    <button class="send-message-btn" data-friend="friend1">
+                        Send Message 💬
+                    </button>
+                    <div class="music-player"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-section">
+            <div class="heart-container">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="connection-info">
+                <div class="time-apart">
+                    <h3>Time Apart</h3>
+                    <p class="days">0 days</p>
+                    <p class="heartbeats">0 heartbeats</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                <div class="next-meeting">
+                    <h3>Until Next Meeting</h3>
+                    <p class="countdown">0 days</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-section right">
+            <div class="profile-card">
+                <img src="images/profile2.jpg" alt="Sakib" class="profile-img">
+                <h2 class="name">Halima</h2>
+                <h3 class="location">Moulvibazar</h3>
+                <div class="weather-card">
+                    <div class="temperature">
+                        <span class="current-temp">27°C</span>
+                        <span class="min-max">23°C / 31°C</span>
+                    </div>
+                    <div class="weather-info">
+                        <p class="description">Mostly sunny</p>
+                        <p class="humidity">Humidity: 80%</p>
+                        <p class="wind">Wind: 10 km/h</p>
+                    </div>
+                    <div class="sun-times">
+                        <p class="sunrise">Sunrise: 06:05</p>
+                        <p class="sunset">Sunset: 18:35</p>
+                    </div>
+                    <button class="send-message-btn" data-friend="friend2">
+                        Send Message 💬
+                    </button>
+                    <div class="music-player"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/messages.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
