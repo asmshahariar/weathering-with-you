@@ -27,6 +27,11 @@ class WeatheringWithYou {
         document.querySelectorAll('.send-message-btn').forEach(btn => {
             btn.addEventListener('click', () => this.sendWhatsAppMessage(btn.dataset.friend));
         });
+        
+        // Keep the tab active
+        setInterval(() => {
+            fetch('/ping').catch(() => {});
+        }, 280000); // Ping every 4.6 minutes
     }
 
     async startApp() {

@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname)));
 
 // Handle all routes
+// Add this before app.get('*', ...)
+app.get('/ping', (req, res) => {
+    res.status(200).send('pong');
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
